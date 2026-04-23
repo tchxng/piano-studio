@@ -2,8 +2,18 @@ import './style.css';
 
 // ── Nav scroll effect ────────────────────────────────────────────────
 const nav = document.getElementById('nav');
+let lastY = 0;
 window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 30);
+  const y = window.scrollY;
+  nav.classList.toggle('scrolled', y > 30);
+  if (y <= 10) {
+    nav.classList.remove('nav-hidden');
+  } else if (y > lastY) {
+    nav.classList.add('nav-hidden');
+  } else {
+    nav.classList.remove('nav-hidden');
+  }
+  lastY = y;
 }, { passive: true });
 
 // ── Hamburger menu ───────────────────────────────────────────────────
@@ -43,6 +53,34 @@ if (videoThumb) {
     inner.appendChild(wrapper);
   }
 }
+
+// ── Hero stat count-up ───────────────────────────────────────────────
+function countUp(el, start, end, duration, suffix) {
+  const t0 = performance.now();
+  function tick(now) {
+    const progress = Math.min((now - t0) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.floor(start + (end - start) * eased) + suffix;
+    if (progress < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+// Set starting values immediately so final numbers never flash during fade-in
+const statEls = document.querySelectorAll('.stat .stat-num');
+if (statEls[0]) statEls[0].textContent = '2010';
+if (statEls[1]) statEls[1].textContent = '0';
+if (statEls[2]) statEls[2].textContent = '0';
+
+// Start count-up while the left side is fading in
+setTimeout(() => {
+  const stats = document.querySelectorAll('.stat');
+  if (stats.length >= 3) {
+    countUp(stats[0].querySelector('.stat-num'), 2010, 2015, 1400, '');
+    countUp(stats[1].querySelector('.stat-num'), 0,    15,   1200, '+');
+    countUp(stats[2].querySelector('.stat-num'), 0,    700,  1400, '+');
+  }
+}, 250);
 
 // ── Contact form ─────────────────────────────────────────────────────
 const form = document.getElementById('contact-form');

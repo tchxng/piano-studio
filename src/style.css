@@ -1,5 +1,39 @@
 @import "tailwindcss";
 
+/* ── HK Grotesk font ────────────────────────────────────────────────── */
+@font-face {
+  font-family: 'HK Grotesk';
+  src: url('/assets/fonts/HKGrotesk-Regular.woff2') format('woff2'),
+       url('/assets/fonts/HKGrotesk-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'HK Grotesk';
+  src: url('/assets/fonts/HKGrotesk-Medium.woff2') format('woff2'),
+       url('/assets/fonts/HKGrotesk-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'HK Grotesk';
+  src: url('/assets/fonts/HKGrotesk-SemiBold.woff2') format('woff2'),
+       url('/assets/fonts/HKGrotesk-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'HK Grotesk';
+  src: url('/assets/fonts/HKGrotesk-Bold.woff2') format('woff2'),
+       url('/assets/fonts/HKGrotesk-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ── Design tokens ──────────────────────────────────────────────────── */
 :root {
   --bg:          #faf6ea;
@@ -24,7 +58,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'HK Grotesk', sans-serif;
   background: var(--bg);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
@@ -89,7 +123,7 @@ button { font-family: inherit; cursor: pointer; }
   color: #fff;
   border: none;
   border-radius: 100px;
-  padding: 13px 28px;
+  padding: 8px 26px;
   font-size: 15px;
   font-weight: 600;
   transition: opacity 0.2s;
@@ -102,7 +136,7 @@ button { font-family: inherit; cursor: pointer; }
   color: var(--text);
   border: 1.5px solid var(--border);
   border-radius: 100px;
-  padding: 12px 28px;
+  padding: 7px 26px;
   font-size: 15px;
   font-weight: 500;
   transition: background 0.2s, border-color 0.2s;
@@ -131,13 +165,20 @@ button { font-family: inherit; cursor: pointer; }
   top: 0; left: 0; right: 0;
   z-index: 100;
   border-bottom: 1px solid transparent;
-  transition: background 0.3s, border-color 0.3s, backdrop-filter 0.3s;
+  transition: background 0.3s, border-color 0.3s, backdrop-filter 0.3s, transform 0.35s ease;
   padding: 0 var(--pad-x);
 }
 #nav.scrolled {
   background: rgba(250,246,234,0.94);
   backdrop-filter: blur(14px);
   border-color: var(--border);
+}
+#nav:has(.mobile-menu.open) {
+  background: var(--bg);
+  box-shadow: 0 8px 32px rgba(28,26,22,0.12);
+}
+#nav.nav-hidden {
+  transform: translateY(-100%);
 }
 
 .nav-inner {
@@ -166,6 +207,11 @@ button { font-family: inherit; cursor: pointer; }
   color: var(--text-mid);
   font-size: 12px;
 }
+.nav-logo-img {
+  height: 40px;
+  width: auto;
+  display: block;
+}
 
 .desktop-nav {
   display: flex;
@@ -185,22 +231,25 @@ button { font-family: inherit; cursor: pointer; }
 .hamburger {
   display: none;
   flex-direction: column;
-  gap: 5px;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
   background: none;
   border: none;
-  padding: 4px;
+  padding: 0;
+  cursor: pointer;
 }
 .hamburger span {
   display: block;
-  width: 22px;
+  width: 100%;
   height: 2px;
   background: var(--text);
   border-radius: 2px;
-  transition: transform 0.2s, opacity 0.2s;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
-.hamburger.open span:nth-child(1) { transform: rotate(45deg) translateY(7px); }
+.hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
 .hamburger.open span:nth-child(2) { opacity: 0; }
-.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translateY(-7px); }
+.hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
 .mobile-menu {
   display: none;
@@ -218,7 +267,24 @@ button { font-family: inherit; cursor: pointer; }
   font-size: 16px;
   color: var(--text);
 }
-.mobile-link--cta { color: var(--accent); font-weight: 600; }
+.mobile-link--cta { color: var(--text); font-weight: 400; }
+
+/* ── Page-load animations ───────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(36px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(48px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.hero-text {
+  animation: fadeInUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.hero-photo-wrap {
+  animation: fadeInRight 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
 
 /* ── Hero ───────────────────────────────────────────────────────────── */
 .hero {
@@ -227,7 +293,6 @@ button { font-family: inherit; cursor: pointer; }
   align-items: center;
   background: var(--bg);
   position: relative;
-  overflow: hidden;
   padding: 110px var(--pad-x) 80px;
 }
 
@@ -242,7 +307,7 @@ button { font-family: inherit; cursor: pointer; }
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 72px;
-  align-items: center;
+  align-items: start;
   width: 100%;
   max-width: 1160px;
   margin: 0 auto;
@@ -294,25 +359,27 @@ button { font-family: inherit; cursor: pointer; }
 .hero-ctas {
   display: flex;
   gap: 12px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   margin-bottom: 40px;
 }
 
 .hero-stats {
   display: flex;
-  gap: 40px;
+  gap: clamp(24px, 5vw, 64px);
   padding-top: 36px;
   border-top: 1px solid var(--border);
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 .stat-num {
-  font-family: 'Caveat', cursive;
-  font-size: 34px;
-  font-weight: 700;
+  font-family: 'HK Grotesk', sans-serif;
+  font-size: clamp(20px, 2.8vw, 34px);
+  font-weight: 500;
   color: var(--text);
   line-height: 1;
+  white-space: nowrap;
 }
 .stat-label {
+  font-family: 'HK Grotesk', sans-serif;
   font-size: 12px;
   color: var(--text-light);
   margin-top: 3px;
@@ -323,44 +390,23 @@ button { font-family: inherit; cursor: pointer; }
   position: relative;
   display: flex;
   justify-content: center;
+  margin-top: -72px;
 }
 .hero-photo {
-  width: 400px;
+  width: 420px;
   max-width: 100%;
-  border-radius: 24px;
-  overflow: hidden;
-  background: var(--bg-alt);
-  aspect-ratio: 3/4;
   position: relative;
 }
 .hero-photo img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
-}
-.hero-photo-caption {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  background: linear-gradient(transparent, rgba(56,48,31,0.8));
-  padding: 40px 24px 24px;
-}
-.hero-photo-name {
+  height: auto;
   display: block;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 500;
-}
-.hero-photo-role {
-  display: block;
-  color: rgba(255,255,255,0.65);
-  font-size: 12px;
 }
 
 .hero-card {
   position: absolute;
-  top: 20px;
-  right: -14px;
+  top: 60px;
+  right: 8px;
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 16px;
@@ -866,16 +912,15 @@ button { font-family: inherit; cursor: pointer; }
   .desktop-nav { display: none; }
   .hamburger { display: flex; }
 
-  .hero-grid,
   .about-grid,
   .video-grid,
   .inhome-grid,
   .contact-grid { grid-template-columns: 1fr; gap: 40px; }
 
-  .hero-photo { width: 100%; height: 280px; aspect-ratio: unset; }
-  .hero-photo img { object-position: top; }
-  .hero-card { right: 0; top: auto; bottom: -16px; left: 50%; transform: translateX(-50%); }
-  .hero-photo-wrap { padding-bottom: 60px; }
+  .hero-grid { gap: 40px; }
+  .hero-photo { width: clamp(200px, 38vw, 380px); }
+  .hero-card { top: 110px; }
+  .hero-photo-wrap { margin-top: -50px; }
 
   .about-grid { grid-template-columns: 1fr; }
   .about-photo { max-width: 100%; }
@@ -889,6 +934,14 @@ button { font-family: inherit; cursor: pointer; }
   .footer-brand p { max-width: 100%; }
 
   .inhome-cards { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 640px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+  .hero-photo { width: 100%; }
+  .hero-card { right: 0; top: auto; bottom: -16px; left: 50%; transform: translateX(-50%); }
+  .hero-photo-wrap { padding-bottom: 60px; margin-top: -20px; }
+  .hero-stats { justify-content: space-between; }
 }
 
 @media (max-width: 480px) {
