@@ -269,21 +269,36 @@ button { font-family: inherit; cursor: pointer; }
 }
 .mobile-link--cta { color: var(--text); font-weight: 400; }
 
+/* ── Scroll-reveal ──────────────────────────────────────────────────── */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.scroll-reveal-delay   { transition-delay: 0.15s; }
+.scroll-reveal-delay-2 { transition-delay: 0.3s;  }
+.scroll-reveal-delay-3 { transition-delay: 0.45s; }
+
 /* ── Page-load animations ───────────────────────────────────────────── */
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(36px); }
+  from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 @keyframes fadeInRight {
-  from { opacity: 0; transform: translateX(48px); }
+  from { opacity: 0; transform: translateX(32px); }
   to   { opacity: 1; transform: translateX(0); }
 }
 
 .hero-text {
-  animation: fadeInUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: fadeInUp 1.5s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 .hero-photo-wrap {
-  animation: fadeInRight 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+  animation: fadeInRight 1.5s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
 }
 
 /* ── Hero ───────────────────────────────────────────────────────────── */
@@ -439,23 +454,9 @@ button { font-family: inherit; cursor: pointer; }
 
 .about-photo-wrap { position: relative; }
 .about-photo {
-  border-radius: 20px;
-  overflow: hidden;
-  background: var(--accent-soft);
-  aspect-ratio: 3/4;
   max-width: 340px;
 }
-.about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
-.about-photo-deco {
-  position: absolute;
-  bottom: -16px;
-  right: -16px;
-  width: 110px;
-  height: 110px;
-  border-radius: 16px;
-  background: var(--accent-soft);
-  z-index: -1;
-}
+.about-photo img { width: 100%; height: auto; display: block; }
 
 /* ── Video ──────────────────────────────────────────────────────────── */
 .video-section { background: var(--bg); padding: var(--section-y) var(--pad-x); }
@@ -495,8 +496,7 @@ button { font-family: inherit; cursor: pointer; }
   align-items: center;
   justify-content: center;
 }
-.play-btn > div,
-.play-btn-inner {
+.play-btn-circle {
   width: 60px; height: 60px;
   border-radius: 50%;
   background: var(--accent);
@@ -504,21 +504,13 @@ button { font-family: inherit; cursor: pointer; }
   align-items: center;
   justify-content: center;
   box-shadow: 0 8px 32px rgba(184,146,74,0.35);
-  transition: transform 0.25s;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  transform-origin: center;
 }
-.video-thumb:hover .play-btn-inner,
-.video-thumb:focus .play-btn-inner { transform: scale(1.12); }
-.video-label {
-  position: absolute;
-  bottom: 12px; right: 14px;
-  background: rgba(0,0,0,0.55);
-  color: #fff;
-  border-radius: 6px;
-  padding: 3px 10px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-}
+.play-btn-circle svg { display: block; flex-shrink: 0; }
+.video-thumb:hover .play-btn-circle,
+.video-thumb:focus .play-btn-circle { transform: scale(1.1); }
 
 .video-text .section-title { margin-bottom: 18px; }
 .video-text .btn-outline { margin-top: 14px; }
@@ -534,13 +526,13 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 .inhome-title {
-  font-size: clamp(28px, 3.5vw, 46px);
+  font-size: clamp(24px, 2.6vw, 34px);
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.02em;
+  white-space: nowrap;
   color: #f5ead0;
   margin-bottom: 18px;
-  text-wrap: balance;
 }
 .inhome-sub {
   font-size: 17px;
@@ -924,7 +916,6 @@ button { font-family: inherit; cursor: pointer; }
 
   .about-grid { grid-template-columns: 1fr; }
   .about-photo { max-width: 100%; }
-  .about-photo-deco { display: none; }
 
   .values-grid { grid-template-columns: 1fr; }
   .pricing-grid { grid-template-columns: 1fr; max-width: 380px; }
@@ -942,6 +933,7 @@ button { font-family: inherit; cursor: pointer; }
   .hero-card { right: 0; top: auto; bottom: -16px; left: 50%; transform: translateX(-50%); }
   .hero-photo-wrap { padding-bottom: 60px; margin-top: -20px; }
   .hero-stats { justify-content: space-between; }
+  .about-photo-wrap { display: none; }
 }
 
 @media (max-width: 480px) {

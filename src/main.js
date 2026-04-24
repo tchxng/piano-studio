@@ -42,17 +42,31 @@ document.querySelectorAll('[data-scroll]').forEach(btn => {
   });
 });
 
-// ── Video thumbnail play button wrapper ──────────────────────────────
+// ── Video thumbnail → YouTube embed ──────────────────────────────────
 const videoThumb = document.querySelector('.video-thumb');
 if (videoThumb) {
-  const inner = videoThumb.querySelector('.play-btn');
-  if (inner) {
-    const wrapper = document.createElement('div');
-    wrapper.className = 'play-btn-inner';
-    while (inner.firstChild) wrapper.appendChild(inner.firstChild);
-    inner.appendChild(wrapper);
-  }
+  videoThumb.addEventListener('click', () => {
+    const iframe = document.createElement('iframe');
+    iframe.src = 'https://www.youtube.com/embed/xDJWPwWocBQ?autoplay=1&rel=0';
+    iframe.allow = 'autoplay; encrypted-media; fullscreen';
+    iframe.allowFullscreen = true;
+    iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;border-radius:inherit;';
+    videoThumb.appendChild(iframe);
+    videoThumb.querySelector('.play-btn').style.display = 'none';
+  });
 }
+
+// ── Scroll-reveal ────────────────────────────────────────────────────
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.scroll-reveal').forEach(el => revealObserver.observe(el));
 
 // ── Hero stat count-up ───────────────────────────────────────────────
 function countUp(el, start, end, duration, suffix) {
