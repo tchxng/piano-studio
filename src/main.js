@@ -96,13 +96,18 @@ setTimeout(() => {
   }
 }, 250);
 
-// ── Contact form ─────────────────────────────────────────────────────
+// ── Contact form (Netlify AJAX) ───────────────────────────────────────
 const form = document.getElementById('contact-form');
 const success = document.getElementById('contact-success');
 
 if (form && success) {
-  form.addEventListener('submit', e => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
+    await fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(form)).toString(),
+    });
     form.hidden = true;
     success.hidden = false;
   });

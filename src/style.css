@@ -34,6 +34,16 @@
   font-display: swap;
 }
 
+/* ── High Empathy font ──────────────────────────────────────────────── */
+@font-face {
+  font-family: 'High Empathy';
+  src: url('/assets/fonts/High Empathy.otf') format('opentype'),
+       url('/assets/fonts/High Empathy.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ── Design tokens ──────────────────────────────────────────────────── */
 :root {
   --bg:          #faf6ea;
@@ -77,12 +87,18 @@ button { font-family: inherit; cursor: pointer; }
 
 .section-alt { background: var(--bg-alt); }
 
+/* Icon color filters (source icons are gold #b8924a) */
+.icon-teal   { filter: hue-rotate(137deg) saturate(0.72) brightness(0.82); }
+.icon-purple { filter: hue-rotate(215deg) saturate(0.67) brightness(1.08); }
+.icon-muted  { filter: saturate(0.30) brightness(0.90); }
+.icon-subtle { filter: brightness(3.5) saturate(0.15); opacity: 0.45; }
+
 .section-label {
-  font-family: 'HK Grotesk', sans-serif;
-  font-size: 19px;
-  font-weight: 600;
+  font-family: 'High Empathy', 'HK Grotesk', sans-serif;
+  font-size: clamp(27px, 3vw, 34px);
+  font-weight: 400;
   color: var(--accent);
-  margin-bottom: 12px;
+  margin-bottom: 0px;
   letter-spacing: 0.01em;
 }
 
@@ -555,7 +571,7 @@ button { font-family: inherit; cursor: pointer; }
 
 .inhome-caveat {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 6px;
   font-size: 13px;
   color: rgba(245,234,208,0.38);
@@ -674,7 +690,7 @@ button { font-family: inherit; cursor: pointer; }
 .pricing-price {
   font-family: 'HK Grotesk', sans-serif;
   font-size: 58px;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1;
   color: var(--text);
   margin-bottom: 4px;
@@ -726,7 +742,7 @@ button { font-family: inherit; cursor: pointer; }
 
 .pricing-note {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   gap: 6px;
   text-align: center;
@@ -741,7 +757,7 @@ button { font-family: inherit; cursor: pointer; }
 
 .testimonials-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 24px;
 }
 
@@ -761,7 +777,6 @@ button { font-family: inherit; cursor: pointer; }
   font-style: italic;
   flex: 1;
 }
-.test-stars { display: flex; gap: 2px; }
 .test-author {
   font-family: 'HK Grotesk', sans-serif;
   font-size: 17px;
@@ -871,16 +886,19 @@ button { font-family: inherit; cursor: pointer; }
   font-weight: 600;
   color: #f0e8d0;
 }
+.footer-logo-img { width: 28px; height: auto; filter: sepia(0.3) brightness(0.97) saturate(0.5); }
+
+.footer-col { display: flex; flex-direction: column; align-items: flex-start; }
 
 .footer-col-title {
   font-family: 'HK Grotesk', sans-serif;
   font-size: 16px;
   font-weight: 600;
-  color: rgba(245,234,208,0.45);
+  color: #f0e8d0;
   margin-bottom: 14px;
 }
 .footer-link {
-  display: block;
+  display: inline-block;
   background: none;
   border: none;
   color: rgba(245,234,208,0.55);
@@ -925,6 +943,7 @@ button { font-family: inherit; cursor: pointer; }
   .values-grid { grid-template-columns: 1fr; }
   .pricing-grid { grid-template-columns: 1fr; max-width: 380px; }
   .testimonials-grid { grid-template-columns: 1fr; }
+
 
   .footer-grid { grid-template-columns: 1fr; gap: 32px; }
   .footer-brand p { max-width: 100%; }
