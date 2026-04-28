@@ -3,8 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tim Cheng Piano Studio</title>
+  <title>Tim Cheng's Piano Studio</title>
   <meta name="description" content="In-home piano lessons for all ages in Centreville, Manassas, Chantilly &amp; Fairfax, Virginia. Flexible scheduling, no monthly commitment." />
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://timchengmusic.com" />
+  <meta property="og:title" content="Tim Cheng's Piano Studio" />
+  <meta property="og:description" content="In-home piano lessons for all ages in Centreville, Manassas, Chantilly &amp; Fairfax, Virginia. Flexible scheduling, no monthly commitment." />
+  <meta property="og:image" content="https://timchengmusic.com/assets/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Tim Cheng's Piano Studio" />
+  <meta name="twitter:description" content="In-home piano lessons for all ages in Centreville, Manassas, Chantilly &amp; Fairfax, Virginia. Flexible scheduling, no monthly commitment." />
+  <meta name="twitter:image" content="https://timchengmusic.com/assets/og-image.jpg" />
+  <link rel="canonical" href="https://timchengmusic.com" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BGMG2FS5GY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BGMG2FS5GY');
+  </script>
   <link rel="stylesheet" href="/src/style.css" />
 </head>
 <body>
@@ -13,7 +36,7 @@
 <nav id="nav">
   <div class="nav-inner">
     <button class="nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-      <img src="/assets/tim-cheng-piano-studio-logo.png" alt="Tim Cheng Piano Studio" class="nav-logo-img" />
+      <img src="/assets/tim-cheng-piano-studio-logo.png" alt="Tim Cheng's Piano Studio" class="nav-logo-img" />
     </button>
 
     <div class="desktop-nav">
@@ -416,7 +439,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="footer-logo">
-          <img src="/assets/tc-logo-white.webp" alt="Tim Cheng Piano Studio" class="footer-logo-img" />
+          <img src="/assets/tc-logo-white.webp" alt="Tim Cheng's Piano Studio" class="footer-logo-img" />
           <span>Tim Cheng's Piano Studio</span>
         </div>
         <p>In-home piano lessons for all ages in Centreville, Manassas, Chantilly &amp; Fairfax, Virginia.</p>
@@ -443,5 +466,23 @@
 </footer>
 
 <script type="module" src="/src/main.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Tim Cheng's Piano Studio",
+  "description": "In-home piano lessons for all ages in Centreville, Manassas, Chantilly & Fairfax, Virginia. Flexible scheduling, no monthly commitment.",
+  "url": "https://timchengmusic.com",
+  "image": "https://timchengmusic.com/assets/og-image.jpg",
+  "areaServed": [
+    "Centreville, VA",
+    "Manassas, VA",
+    "Chantilly, VA",
+    "Fairfax, VA"
+  ],
+  "serviceType": "Piano Lessons",
+  "priceRange": "$$"
+}
+</script>
 </body>
 </html>

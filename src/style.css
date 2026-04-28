@@ -883,10 +883,10 @@ button { font-family: inherit; cursor: pointer; }
   align-items: center;
   gap: 10px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 400;
   color: #f0e8d0;
 }
-.footer-logo-img { width: 28px; height: auto; filter: sepia(0.3) brightness(0.97) saturate(0.5); }
+.footer-logo-img { width: 28px; height: auto; filter: sepia(0.5) brightness(0.97) saturate(0.75); }
 
 .footer-col { display: flex; flex-direction: column; align-items: flex-start; }
 

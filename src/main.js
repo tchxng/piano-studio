@@ -47,7 +47,7 @@ const videoThumb = document.querySelector('.video-thumb');
 if (videoThumb) {
   videoThumb.addEventListener('click', () => {
     const iframe = document.createElement('iframe');
-    iframe.src = 'https://www.youtube.com/embed/xDJWPwWocBQ?autoplay=1&rel=0';
+    iframe.src = 'https://www.youtube.com/embed/v4_KMwheXs8?autoplay=1&rel=0';
     iframe.allow = 'autoplay; encrypted-media; fullscreen';
     iframe.allowFullscreen = true;
     iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;border-radius:inherit;';
